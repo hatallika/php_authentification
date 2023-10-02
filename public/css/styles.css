@@ -1,0 +1,151 @@
+body {
+  color: #8f8f8f;
+  font: 12px Tahoma, sans-serif;
+  background-color: #f8f8f8;
+  border-top: 5px solid #7e7e7e;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+input[type=text], input[type=phone], input[type=email], input[type=password] {
+  background-color: #f3f3f3;
+  border: 1px solid #e7e7e7;
+  height: 30px;
+  color: #b2b2b2;
+  padding: 0 10px;
+  vertical-align: top;
+}
+
+button {
+  color: #fff;
+  background-color: #29c5e6;
+  border: none;
+  height: 32px;
+  font-family: "Oswald", sans-serif;
+}
+
+p {
+  margin: 20px 0;
+}
+
+#wrapper {
+  max-width: 960px;
+  height: 100%;
+  margin: auto;
+  border-left: 1px solid #b2b2b2;
+  border-right: 1px solid #b2b2b2;
+  padding: 20px 15px;
+}
+
+header {
+  padding: 20px 0;
+}
+
+main {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 90px;
+}
+
+footer {
+  height: 20px;
+  margin-top: -20px;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  list-style-position: inside;
+  font: 14px "Oswald", sans-serif;
+  padding: 10px;
+}
+
+.nav__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__user {
+  display: flex;
+  justify-content: right;
+}
+
+.nav__menu-list {
+  display: flex;
+}
+
+.nav__menu-item {
+  display: inline-block;
+  padding: 10px 30px;
+  margin: 0;
+  list-style-position: inside;
+  font: 14px "Oswald", sans-serif;
+}
+.nav__menu-item--active {
+  background: rgba(41, 197, 230, 0.64);
+  color: #fff;
+}
+.nav__menu-item--user {
+  position: relative;
+  padding: 10px 30px 10px 20px;
+}
+.nav__menu-item--user:before {
+  content: "";
+  background-image: url(/img/profile.png);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-size: cover;
+  left: 0px;
+}
+
+.nav__menu-href {
+  color: #929292;
+  text-decoration: none;
+}
+
+#heading {
+  background: #f0f0f0;
+  margin: 30px 0;
+  padding-left: 20px;
+}
+
+h1 {
+  display: inline-block;
+  color: #7e7e7e;
+  font: 40px/40px "Oswald", sans-serif;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.auth__captcha {
+  max-width: 33%;
+  margin: 10px 0 10px;
+}
+
+.auth__message, .reg_form__message, .profile-form__message {
+  max-width: 33%;
+  min-height: 20px;
+  background: #f0f0f0;
+  border: 1px solid #a01e1e;
+  margin: 10px 0 10px;
+  display: block;
+  padding: 10px;
+}
+.auth__message--none, .reg_form__message--none, .profile-form__message--none {
+  display: none;
+}
+
+/*# sourceMappingURL=styles.css.map */

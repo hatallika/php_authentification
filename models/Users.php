@@ -7,6 +7,8 @@ use http\Client\Curl\User;
 
 class Users extends DBModel
 {
+    //Таблица пользователей. Один объект - одна запись таблицы
+
     protected $id;
     protected ?string $login;
     protected ?string $phone;

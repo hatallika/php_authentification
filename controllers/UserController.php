@@ -8,11 +8,13 @@ use app\models\Users;
 
 class UserController extends Controller
 {
+    //render index страницы
     public function actionIndex()
     {
         echo $this->render('index');
     }
 
+    //рендер блока с формой авторизации с передачей параметров
     public function actionLogin()
     {
         echo $this->render('auth/auth', [
@@ -22,6 +24,7 @@ class UserController extends Controller
         ]);
     }
 
+    //Рендер блока с формой регистрации
     public function actionRegister()
     {
         if (Users::isAuth()) {
@@ -40,6 +43,7 @@ class UserController extends Controller
     }
 
 
+    //страница профиля пользователя
     public function actionProfile()
     {
         if (Users::isAuth()) {
@@ -53,8 +57,12 @@ class UserController extends Controller
         }
     }
 
+    //регистрация пользователя после проверки входных данных.
+    // Не успела разделить по принципу единой ответственности
+    //в авторизациии для этого работает класс валидации
     public function actionCreate()
     {
+        //сделать обработку полей
         $login = $_POST['login'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
@@ -73,7 +81,7 @@ class UserController extends Controller
         $checkUserData = $this->checkUserExist($login, $email, $phone);
 
         if ($checkPass && $checkUserData) {
-            //очистим поля ввода
+            //очистим данные пользователя при успешном заполнении формы
             $this->delete_value('register', 'login');
             $this->delete_value('register', 'email');
             $this->delete_value('register', 'phone');
@@ -105,20 +113,22 @@ class UserController extends Controller
     //изменить данные профиля
     public function actionEdit()
     {
+        //класс валидации для формы изменения данных пользователя
         $validator  = new EditUserValidator($this->getGlobalParams());
+
         $id = $_SESSION['id'];
         $user = Users::getOne($id);
+        //получим ошибки валидации
         $errors = $validator->validate();
 
+        //перерендер страницы профиля с параметрами ошибок
         if($errors){
-            var_dump('111');
             echo $this->render('profile', [
                 'user'=>$user,
                 'errors'=>$errors
                 ]);
-//            header("Location: " . $_SERVER['HTTP_REFERER']);
-//            die();
         } else {
+            //обновим разрешенные данные пользователя
             foreach ($this->getGlobalParams() as $key => $value) {
                 if ($key == 'login' || $key == 'email' || $key == 'phone'|| $key=='password') {
                     //Редактируем  данные пользователя
@@ -136,7 +146,8 @@ class UserController extends Controller
         }
     }
 
-    //прямая валидация, еще без использования класса валидатора
+    //здесь прямая валидация для формы регистрации, еще без использования класса валидатора
+    // так как в регистрации пользуемся ссесией для сохранения полей и ошибок.
     private function checkPassword($pass, $confPass): bool
     {
         if ($pass != $confPass) {
@@ -148,7 +159,7 @@ class UserController extends Controller
     }
 
 
-    // cохранение значения старого поля в сессию в случае ошибки и перезагрузки
+    // cохранение вводимых полей в форму в сессию в случае обновления страницы
     function insert_value($key, $name)
     {
         if (isset($_POST[$name])) {
@@ -170,6 +181,7 @@ class UserController extends Controller
         if (isset($_SESSION[$key . $name])) return htmlspecialchars($_SESSION[$key . $name]);
     }
 
+    //проверка на существование пользователя с такими данными
     public function checkUserExist($login, $email, $phone): bool
     {
         //проверяем есть ли такой пользователь в БД
@@ -179,6 +191,7 @@ class UserController extends Controller
             'phone' => $phone
         ]);
         //если пользователь уже существует проверяем по каким данным совпадение
+
         if ($user) {
 
             if ($user->login === $login) {
@@ -187,12 +200,12 @@ class UserController extends Controller
                 unset($_SESSION['register_err']['user']['login']);
             }
             if ($user->email === $email) {
-                $_SESSION['register_err']['user']['email'] = "Такая почта существует";
+                $_SESSION['register_err']['user']['email'] = "Такая почта занята";
             } else {
                 unset($_SESSION['register_err']['user']['email']);
             }
             if ($user->phone === $phone) {
-                $_SESSION['register_err']['user']['phone'] = "Такая почта существует";
+                $_SESSION['register_err']['user']['phone'] = "Такой номер телефона занят";
             } else {
                 unset($_SESSION['register_err']['user']['phone']);
             }

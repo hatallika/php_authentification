@@ -28,7 +28,7 @@ class EditUserValidator extends Validator
 
         if( $req["email"] )
             if (Users::getOneWhere('email', $req["email"])){
-                $this -> addError('email','Пользователь с таким номером уже существует');
+                $this -> addError('email','Пользователь с такой почтой уже существует');
             }
 
         if ($req['password'] !== $req['password_confirmation']){

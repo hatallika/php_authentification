@@ -6,6 +6,9 @@ use app\engine\Db;
 
 abstract class DBModel extends Model
 {
+    //здесь прослойка для обращения в БД от классов - сущностей (по таблицам)
+    //по паттерну ActiveRecords
+
     abstract protected static function getTableName();
 
     public static function getOne($id)

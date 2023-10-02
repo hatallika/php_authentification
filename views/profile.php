@@ -1,36 +1,46 @@
-<h2> Профиль </h2>
+<div id="heading">
+    <h1>Профиль</h1>
+</div>
 
 <form method="post" action="/user/edit">
     <label>
+        <div class="profile-form__message <?=$errors['login']?'':'profile-form__message--none'?>">
+            <?=$errors['login']?>
+        </div>
+        <input type="text" name="login" value="<?= $user->login ?>"/>
+    </label>
+    <button>Сохранить данные</button>
+</form>
 
-        <?=$_SESSION['edit_err']['login']?>
-        <input name="login" value="<?= $user->login ?>"/>
+
+<form method="post" action="/user/edit">
+    <label>
+        <div class="profile-form__message <?=$errors['email']?'':'profile-form__message--none'?>">
+            <?=$errors['email']?>
+        </div>
+
+        <input name="email" type="text" value="<?= $user->email ?>"/>
     </label>
     <button>Сохранить данные</button>
 </form>
 
 <form method="post" action="/user/edit">
     <label>
+        <div class="profile-form__message <?=$errors['phone']?'':'profile-form__message--none'?>">
+            <?=$errors['phone']?>
+        </div>
 
-        <?=$errors['email']?>
-        <input name="email" value="<?= $user->email ?>"/>
-    </label>
-    <button>Сохранить данные</button>
-</form>
-
-<form method="post" action="/user/edit">
-    <label>
-
-        <?=$errors['phone']?>
-        <input name="phone" value="<?= $user->phone ?>"/>
+        <input type="text" name="phone" value="<?= $user->phone ?>"/>
     </label>
     <button>Сохранить данные</button>
 </form>
 
 <form method="post" action="/user/edit">
     <div class="form-group">
+        <div class="profile-form__message <?=$errors['password']?'':'profile-form__message--none'?>">
+            <?=$errors['password']?>
+        </div>
 
-        <?=$errors['password']?>
         <input type="text" class="form-control" name="password" placeholder="Новый пароль"
                required >
     </div>

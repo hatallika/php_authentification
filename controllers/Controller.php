@@ -48,11 +48,6 @@ class Controller
                 'content' => $this->renderTemplate($template, $params),
                 'isAuth' => Users::isAuth(),
                 'username' => Users::get_user(),
-//                'auth'=>$this->renderTemplate('auth/auth', [
-//                    'auth' => Users::isAuth(),
-//                    'username' => Users::get_user(),
-//                    'message_auth' => Message::getMessageAuth()
-//                ]),
             ]);
         } else {
             return $this->renderTemplate($template, $params);

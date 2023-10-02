@@ -31,8 +31,6 @@ class AuthController extends Controller
             header("Location: ". $_SERVER['HTTP_REFERER']);
             die();
         }
-
-
     }
 
     public function actionLogout(){
