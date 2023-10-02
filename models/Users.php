@@ -72,7 +72,7 @@ class Users extends DBModel
             'email' => $login,
             'phone' => $login
         ]);
-        var_dump($passDB);
+
         //password_hash('123', PASSWORD_DEFAULT);
         if (password_verify($pass, $passDB->pass)) {
             $_SESSION['login'] = $login;

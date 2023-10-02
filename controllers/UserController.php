@@ -100,7 +100,7 @@ class UserController extends Controller
                 header("Location: /user/profile/");
                 die();
             } else {
-                var_dump('Не удалось создать пользователя');
+
             }
 
         } else {

@@ -99,7 +99,6 @@ class Db
     //INSERT, UPDATE, DELETE
     public function execute($sql, $params = []): int
     {
-        var_dump($sql, $params);
         return $this->query($sql, $params)->rowCount(); //вернем количество затронутых данных
     }
 
